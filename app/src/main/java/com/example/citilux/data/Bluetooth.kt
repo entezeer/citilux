@@ -1,4 +1,4 @@
-package com.example.citilux.utils
+package com.example.citilux.data
 
 import android.bluetooth.BluetoothDevice
 import com.actions.ibluz.factory.BluzDeviceFactory
@@ -39,5 +39,3 @@ data class BluetoothResult(
         } ?: false
     }
 }
-
-class ScanFailedException : Exception()

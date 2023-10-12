@@ -13,8 +13,9 @@ import com.actions.ibluz.factory.IBluzDevice.OnConnectionListener
 import com.actions.ibluz.factory.IBluzDevice.OnDiscoveryListener
 import com.actions.ibluz.manager.BluzManager
 import com.actions.ibluz.manager.BluzManagerData.*
-import com.example.citilux.utils.BluetoothConnectionStatus
-import com.example.citilux.utils.BluetoothResult
+import com.example.citilux.data.LightParameters
+import com.example.citilux.data.BluetoothConnectionStatus
+import com.example.citilux.data.BluetoothResult
 import java.util.*
 import java.util.concurrent.atomic.AtomicInteger
 
@@ -40,6 +41,8 @@ class BluetoothManager(
     private val scanDevices = Collections.synchronizedSet<BluetoothResult>(mutableSetOf())
     private val mainHandler = Handler(Looper.getMainLooper())
 
+
+
     init {
         setupOnConnectionListener()
         setupOnDiscoveryListener()
@@ -58,7 +61,7 @@ class BluetoothManager(
     val connectionStatusLiveData = MutableLiveData<BluetoothConnectionStatus>()
 
     // LiveData for lamp light parameters
-//    private val lampLightLiveData = MutableLiveData<LightParameters>()
+    val lampLightLiveData = MutableLiveData<LightParameters>()
 
     // LiveData for lamp volume
     val lampVolumeLiveData = MutableLiveData<Int>()
@@ -204,10 +207,10 @@ class BluetoothManager(
             sendQueueCommand(130, 0, 0, byteArrayOf()) // Запросить состояние света
         }
         if (arg0 == 16770) { // Установлен цвет
-//            val params = LightParameters.fromHex(rbgaHex = arg1, lightHex = arg2)
+            val params = LightParameters.fromHex(rbgaHex = arg1, lightHex = arg2)
             // Используем Handler для обновления LiveData на основном потоке
             mainHandler.post {
-//                emitLampLight(params)
+                emitLampLight(params)
             }
         }
     }
@@ -218,9 +221,10 @@ class BluetoothManager(
     }
 
 
-    //  Use LiveData instead emit for data
+    //  Use LiveData instead Flow emit for data
     private fun emitConnectedDevice(device: BluetoothDevice, status: BluetoothConnectionStatus) {
         connectedDevicesLiveData.postValue(BluetoothResult(device, status))
+        emitConnectionStatus(status)
         val entry = BluetoothResult(device, status)
         scanDevices.removeIf { it == entry }
         scanDevices.add(entry)
@@ -254,12 +258,14 @@ class BluetoothManager(
     }
 
     private fun emitConnectionStatus(status: BluetoothConnectionStatus) {
+        if (status == BluetoothConnectionStatus.DATA_CONNECTED) initManager()
+        else manager?.release()
         connectionStatusLiveData.postValue(status)
     }
 
-//    private fun emitLampLight(lightParameters: LightParameters) {
-//        lampLightLiveData.postValue(lightParameters)
-//    }
+    private fun emitLampLight(lightParameters: LightParameters) {
+        lampLightLiveData.postValue(lightParameters)
+    }
 
     private fun emitLampVolume(volume: Int) {
         lampVolumeLiveData.postValue(volume)

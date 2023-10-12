@@ -1,16 +1,15 @@
-package com.example.citilux.main
+package com.example.citilux.ui.main
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import com.btw.citilux.device.feature.bluetooth.BluetoothManager
+import com.example.citilux.ui.device.DeviceFragment
 import com.example.citilux.databinding.FragmentMainBinding
-import com.example.citilux.main.adapter.BluetoothDevicesAdapter
-import com.example.citilux.utils.BluetoothResult
+import com.example.citilux.ui.main.adapter.BluetoothDevicesAdapter
+import com.example.citilux.data.BluetoothResult
 
 class MainFragment : Fragment(), BluetoothDevicesAdapter.Listener {
 
@@ -54,12 +53,16 @@ class MainFragment : Fragment(), BluetoothDevicesAdapter.Listener {
     }
 
     override fun onClick(item: BluetoothResult) {
-        if (!item.isConnected)
-            bluetoothManager.connectDevice(item)
+        if (item.isConnected) showDeviceBottomSheet()
+        else bluetoothManager.connectDevice(item)
     }
 
     override fun onLongClick(item: BluetoothResult) {
         if (item.isConnected)
             bluetoothManager.disconnectDevice(item)
+    }
+
+    private fun showDeviceBottomSheet() {
+        DeviceFragment(bluetoothManager).show(childFragmentManager, "")
     }
 }

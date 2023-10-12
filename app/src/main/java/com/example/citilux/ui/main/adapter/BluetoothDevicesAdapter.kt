@@ -1,13 +1,12 @@
-package com.example.citilux.main.adapter
+package com.example.citilux.ui.main.adapter
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.citilux.R
 import com.example.citilux.databinding.ItemBluetoothDevicesBinding
-import com.example.citilux.utils.BluetoothConnectionStatus
-import com.example.citilux.utils.BluetoothResult
+import com.example.citilux.data.BluetoothConnectionStatus
+import com.example.citilux.data.BluetoothResult
 
 
 class BluetoothDevicesAdapter(var listener: Listener) :
