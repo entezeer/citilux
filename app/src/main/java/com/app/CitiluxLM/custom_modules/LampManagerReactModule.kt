@@ -4,8 +4,6 @@ import com.facebook.react.bridge.ReactContextBaseJavaModule
 import com.facebook.react.bridge.ReactApplicationContext
 import com.facebook.react.bridge.ReactMethod
 import com.facebook.react.bridge.Promise
-import android.os.Handler
-import android.os.Looper
 import com.actions.ibluz.factory.BluzDeviceFactory
 import com.actions.ibluz.factory.IBluzDevice
 import com.actions.ibluz.manager.BluzManager
@@ -13,14 +11,14 @@ import com.actions.ibluz.manager.BluzManagerData
 import com.app.CitiluxLM.data.Lamp
 import com.app.CitiluxLM.data.LightParameters
 
-class LampManagerReactModule(val reactContext: ReactApplicationContext) : ReactContextBaseJavaModule(reactContext) {
+class LampManagerReactModule(val reactContext: ReactApplicationContext) :
+    ReactContextBaseJavaModule(reactContext) {
 
     private var connector: IBluzDevice? = BluzDeviceFactory.getDevice(reactContext).apply {
         setAutoConnectDataChanel(true)
         setConnectDataChanelBackgroundSupport(true)
     }
     var manager: BluzManager? = null
-    private val mainHandler = Handler(Looper.getMainLooper())
 
     override fun getName(): String {
         return "LampManagerAndroid"
@@ -28,17 +26,16 @@ class LampManagerReactModule(val reactContext: ReactApplicationContext) : ReactC
 
     @ReactMethod()
     fun initManager(volumePromise: Promise, commandPromise: Promise) {
-        mainHandler.post {
-            manager = BluzManager(reactContext, connector) {
-                requireNotNull(manager).run {
-                    setSystemTime()
-                    setForeground(true)
-                    setOnGlobalUIChangedListener(getBluetoothEventListener(volumePromise))
-                    setOnCustomCommandListener(getCustomCommandListener(commandPromise))
-                    sendQueueCommand(135, 0, 0, byteArrayOf())
-                }
+        manager = BluzManager(reactContext, connector) {
+            requireNotNull(manager).run {
+                setSystemTime()
+                setForeground(true)
+                setOnGlobalUIChangedListener(getBluetoothEventListener(volumePromise))
+                setOnCustomCommandListener(getCustomCommandListener(commandPromise))
+                sendQueueCommand(135, 0, 0, byteArrayOf())
             }
         }
+
     }
 
     @ReactMethod
@@ -86,17 +83,18 @@ class LampManagerReactModule(val reactContext: ReactApplicationContext) : ReactC
         manager?.sendCustomCommand(key, arg1, arg2, data)
     }
 
-    private fun getBluetoothEventListener(promise: Promise) = object : BluzManagerData.OnGlobalUIChangedListener {
-        override fun onBatteryChanged(arg0: Int, arg1: Boolean) {}
+    private fun getBluetoothEventListener(promise: Promise) =
+        object : BluzManagerData.OnGlobalUIChangedListener {
+            override fun onBatteryChanged(arg0: Int, arg1: Boolean) {}
 
-        override fun onEQChanged(arg0: Int) {}
+            override fun onEQChanged(arg0: Int) {}
 
-        override fun onModeChanged(arg0: Int) {}
+            override fun onModeChanged(arg0: Int) {}
 
-        override fun onVolumeChanged(arg0: Int, arg1: Boolean) {
-            promise.resolve(arg0)
+            override fun onVolumeChanged(arg0: Int, arg1: Boolean) {
+                promise.resolve(arg0)
+            }
         }
-    }
 
     private fun getCustomCommandListener(promise: Promise) =
         BluzManagerData.OnCustomCommandListener { arg0, arg1, arg2, _ ->
