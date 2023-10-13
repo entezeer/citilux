@@ -6,6 +6,8 @@ import com.facebook.react.bridge.ReactMethod
 import com.facebook.react.bridge.Promise
 import android.os.Handler
 import android.os.Looper
+import com.actions.ibluz.factory.BluzDeviceFactory
+import com.actions.ibluz.factory.IBluzDevice
 import com.actions.ibluz.manager.BluzManager
 import com.actions.ibluz.manager.BluzManagerData
 import com.app.CitiluxLM.data.Lamp
@@ -13,6 +15,10 @@ import com.app.CitiluxLM.data.LightParameters
 
 class LampManagerReactModule(val reactContext: ReactApplicationContext) : ReactContextBaseJavaModule(reactContext) {
 
+    private var connector: IBluzDevice? = BluzDeviceFactory.getDevice(reactContext).apply {
+        setAutoConnectDataChanel(true)
+        setConnectDataChanelBackgroundSupport(true)
+    }
     var manager: BluzManager? = null
     private val mainHandler = Handler(Looper.getMainLooper())
 
