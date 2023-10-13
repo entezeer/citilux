@@ -41,15 +41,10 @@ class BluetoothManager(
     private val scanDevices = Collections.synchronizedSet<BluetoothResult>(mutableSetOf())
     private val mainHandler = Handler(Looper.getMainLooper())
 
-
-
     init {
         setupOnConnectionListener()
         setupOnDiscoveryListener()
     }
-
-    val isBluetoothReady: Boolean
-        get() = connector?.isEnabled ?: false
 
     // LiveData for connected devices
     val connectedDevicesLiveData = MutableLiveData<BluetoothResult>()
@@ -121,7 +116,6 @@ class BluetoothManager(
                         val entry = BluetoothResult(
                             device,
                             BluetoothConnectionStatus.DISCONNECTED,
-                            isInitial = true
                         )
                         emitFoundDevice(entry)
                     }

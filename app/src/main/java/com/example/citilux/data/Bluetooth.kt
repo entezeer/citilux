@@ -29,7 +29,6 @@ enum class BluetoothConnectionStatus {
 data class BluetoothResult(
     val device: BluetoothDevice,
     val state: BluetoothConnectionStatus,
-    val isInitial: Boolean = false
 ) {
     val isConnected = state == BluetoothConnectionStatus.DATA_CONNECTED
 

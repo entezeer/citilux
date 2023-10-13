@@ -58,6 +58,9 @@ interface LightParameters {
                 return RawLight(rgb, 0, 0, Lamp.Mode.NORMAL)
             }
 
+        val ON: LightParameters
+            get() = RawLight(Color.WHITE, 0, 0, Lamp.Mode.NORMAL)
+
         val OFF: LightParameters
             get() = RawLight(Color.BLACK, 0, 0, Lamp.Mode.NORMAL)
     }
