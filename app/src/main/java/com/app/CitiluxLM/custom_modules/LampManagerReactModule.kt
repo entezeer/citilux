@@ -1,4 +1,4 @@
-package com.app.CitiluxLM.react
+package com.app.CitiluxLM.custom_modules
 
 import com.facebook.react.bridge.ReactContextBaseJavaModule
 import com.facebook.react.bridge.ReactApplicationContext

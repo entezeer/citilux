@@ -1,4 +1,4 @@
-package com.app.CitiluxLM.react
+package com.app.CitiluxLM.custom_modules
 
 import android.bluetooth.BluetoothDevice
 import android.os.Handler
