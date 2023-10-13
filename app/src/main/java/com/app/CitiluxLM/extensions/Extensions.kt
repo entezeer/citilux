@@ -1,7 +1,7 @@
-package com.example.citilux.extensions
+package com.app.CitiluxLM.extensions
 
 import android.graphics.Color
-import com.example.citilux.data.Lamp
+import com.app.CitiluxLM.data.Lamp
 
 fun <T> Set<T>.addOrReplace(element: T, isEqual: (T, T) -> Boolean) = map {
     if (isEqual(it, element))

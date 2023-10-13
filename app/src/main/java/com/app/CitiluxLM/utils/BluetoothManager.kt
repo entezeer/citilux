@@ -1,4 +1,4 @@
-package com.btw.citilux.device.feature.bluetooth
+package com.app.CitiluxLM.utils
 
 import android.annotation.SuppressLint
 import android.bluetooth.BluetoothDevice
@@ -13,9 +13,9 @@ import com.actions.ibluz.factory.IBluzDevice.OnConnectionListener
 import com.actions.ibluz.factory.IBluzDevice.OnDiscoveryListener
 import com.actions.ibluz.manager.BluzManager
 import com.actions.ibluz.manager.BluzManagerData.*
-import com.example.citilux.data.LightParameters
-import com.example.citilux.data.BluetoothConnectionStatus
-import com.example.citilux.data.BluetoothResult
+import com.app.CitiluxLM.data.LightParameters
+import com.app.CitiluxLM.data.BluetoothConnectionStatus
+import com.app.CitiluxLM.data.BluetoothResult
 import java.util.*
 import java.util.concurrent.atomic.AtomicInteger
 

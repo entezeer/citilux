@@ -1,4 +1,4 @@
-package com.example.citilux.react
+package com.app.CitiluxLM.react
 
 import android.bluetooth.BluetoothDevice
 import android.os.Handler
@@ -7,8 +7,8 @@ import com.actions.ibluz.factory.BluzDeviceFactory
 import com.actions.ibluz.factory.IBluzDevice
 import com.actions.ibluz.factory.IBluzDevice.OnConnectionListener
 import com.actions.ibluz.factory.IBluzDevice.OnDiscoveryListener
-import com.example.citilux.data.BluetoothConnectionStatus
-import com.example.citilux.data.BluetoothResult
+import com.app.CitiluxLM.data.BluetoothConnectionStatus
+import com.app.CitiluxLM.data.BluetoothResult
 
 class BluetoothManagerReactModule(reactContext: ReactApplicationContext) : ReactContextBaseJavaModule(reactContext) {
 

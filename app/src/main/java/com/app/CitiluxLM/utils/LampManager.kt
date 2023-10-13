@@ -1,16 +1,15 @@
-package com.example.citilux.utils
+package com.app.CitiluxLM.utils
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
-import com.btw.citilux.device.feature.bluetooth.BluetoothManager
-import com.example.citilux.BuildConfig
-import com.example.citilux.data.BluetoothConnectionStatus
-import com.example.citilux.data.Lamp
-import com.example.citilux.data.LightParameters
-import com.example.citilux.data.RawLight
-import com.example.citilux.data.WhiteWarmthLight
-import com.example.citilux.extensions.ledNormalized
-import com.example.citilux.extensions.rgbNormalized
+import com.app.CitiluxLM.BuildConfig
+import com.app.CitiluxLM.data.BluetoothConnectionStatus
+import com.app.CitiluxLM.data.Lamp
+import com.app.CitiluxLM.data.LightParameters
+import com.app.CitiluxLM.data.RawLight
+import com.app.CitiluxLM.data.WhiteWarmthLight
+import com.app.CitiluxLM.extensions.ledNormalized
+import com.app.CitiluxLM.extensions.rgbNormalized
 
 const val BROADCAST_ACTION_CONTROL_LAUNCH = "com.btw.citilux.CONTROL_LAUNCH"
 const val BROADCAST_ACTION_CONTROL_EXIT = "com.btw.citilux.CONTROL_EXIT"

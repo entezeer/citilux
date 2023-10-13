@@ -1,4 +1,4 @@
-package com.example.citilux.react
+package com.app.CitiluxLM.react
 
 import com.facebook.react.ReactPackage
 import com.facebook.react.bridge.NativeModule

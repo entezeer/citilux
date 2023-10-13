@@ -1,4 +1,4 @@
-package com.example.citilux
+package com.app.CitiluxLM
 
 import org.junit.Test
 

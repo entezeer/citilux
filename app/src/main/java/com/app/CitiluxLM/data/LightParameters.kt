@@ -1,8 +1,8 @@
-package com.example.citilux.data
+package com.app.CitiluxLM.data
 
 import android.graphics.Color
 import android.os.Parcelable
-import com.example.citilux.extensions.brightnessNormalized
+import com.app.CitiluxLM.extensions.brightnessNormalized
 import kotlinx.android.parcel.IgnoredOnParcel
 import kotlinx.android.parcel.Parcelize
 import kotlin.random.Random

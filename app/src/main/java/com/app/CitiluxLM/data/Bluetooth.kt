@@ -1,4 +1,4 @@
-package com.example.citilux.data
+package com.app.CitiluxLM.data
 
 import android.bluetooth.BluetoothDevice
 import com.actions.ibluz.factory.BluzDeviceFactory

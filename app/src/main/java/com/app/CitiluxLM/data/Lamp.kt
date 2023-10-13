@@ -1,4 +1,4 @@
-package com.example.citilux.data
+package com.app.CitiluxLM.data
 
 import android.graphics.Color
 

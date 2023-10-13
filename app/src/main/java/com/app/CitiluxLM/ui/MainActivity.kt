@@ -1,4 +1,4 @@
-package com.example.citilux.ui
+package com.app.CitiluxLM.ui
 
 import android.bluetooth.BluetoothAdapter
 import android.content.Intent
@@ -7,9 +7,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
-import com.example.citilux.R
-import com.example.citilux.databinding.ActivityMainBinding
-import com.example.citilux.ui.main.MainFragment
+import com.app.CitiluxLM.R
+import com.app.CitiluxLM.databinding.ActivityMainBinding
+import com.app.CitiluxLM.ui.main.MainFragment
 
 class MainActivity : AppCompatActivity() {
 

@@ -1,4 +1,4 @@
-package com.example.citilux.react
+package com.app.CitiluxLM.react
 
 import com.facebook.react.bridge.ReactContextBaseJavaModule
 import com.facebook.react.bridge.ReactApplicationContext
@@ -8,8 +8,8 @@ import android.os.Handler
 import android.os.Looper
 import com.actions.ibluz.manager.BluzManager
 import com.actions.ibluz.manager.BluzManagerData
-import com.example.citilux.data.Lamp
-import com.example.citilux.data.LightParameters
+import com.app.CitiluxLM.data.Lamp
+import com.app.CitiluxLM.data.LightParameters
 
 class LampManagerReactModule(val reactContext: ReactApplicationContext) : ReactContextBaseJavaModule(reactContext) {
 

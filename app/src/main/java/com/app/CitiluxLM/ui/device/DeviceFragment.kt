@@ -1,14 +1,14 @@
-package com.example.citilux.ui.device
+package com.app.CitiluxLM.ui.device
 
 import android.os.Bundle
 import android.util.DisplayMetrics
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.btw.citilux.device.feature.bluetooth.BluetoothManager
-import com.example.citilux.data.LightParameters
-import com.example.citilux.databinding.FragmentDeviceBinding
-import com.example.citilux.utils.LampManager
+import com.app.CitiluxLM.utils.BluetoothManager
+import com.app.CitiluxLM.data.LightParameters
+import com.app.CitiluxLM.databinding.FragmentDeviceBinding
+import com.app.CitiluxLM.utils.LampManager
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import java.util.concurrent.atomic.AtomicBoolean
 

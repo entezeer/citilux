@@ -1,15 +1,15 @@
-package com.example.citilux.ui.main
+package com.app.CitiluxLM.ui.main
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.btw.citilux.device.feature.bluetooth.BluetoothManager
-import com.example.citilux.ui.device.DeviceFragment
-import com.example.citilux.databinding.FragmentMainBinding
-import com.example.citilux.ui.main.adapter.BluetoothDevicesAdapter
-import com.example.citilux.data.BluetoothResult
+import com.app.CitiluxLM.utils.BluetoothManager
+import com.app.CitiluxLM.ui.device.DeviceFragment
+import com.app.CitiluxLM.databinding.FragmentMainBinding
+import com.app.CitiluxLM.ui.main.adapter.BluetoothDevicesAdapter
+import com.app.CitiluxLM.data.BluetoothResult
 
 class MainFragment : Fragment(), BluetoothDevicesAdapter.Listener {
 
