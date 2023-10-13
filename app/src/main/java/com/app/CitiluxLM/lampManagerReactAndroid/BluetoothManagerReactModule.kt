@@ -22,8 +22,8 @@ class BluetoothManagerReactModule(reactContext: ReactApplicationContext) :
 
     private val mainHandler = Handler(Looper.getMainLooper())
 
-    private val foundDevices = hashMapOf<String, BluetoothDevice>()
-    private val connectedDevices = hashMapOf<String, BluetoothDevice>()
+    val foundDevices = hashMapOf<String, BluetoothResult>()
+    val connectedDevices = hashMapOf<String, BluetoothResult>()
 
     init {
         mainHandler.post {
@@ -45,7 +45,7 @@ class BluetoothManagerReactModule(reactContext: ReactApplicationContext) :
             override fun onConnected(p0: BluetoothDevice?) {
                 p0?.let { bluetoothDevice ->
                     connectedDevices[bluetoothDevice.name ?: bluetoothDevice.toString()] =
-                        bluetoothDevice
+                        BluetoothResult(bluetoothDevice, BluetoothConnectionStatus.DATA_CONNECTED)
                     promise.resolve(
                         bluetoothDevice.name ?: bluetoothDevice.toString()
                     )
@@ -54,7 +54,8 @@ class BluetoothManagerReactModule(reactContext: ReactApplicationContext) :
 
             override fun onDisconnected(p0: BluetoothDevice?) {
                 p0?.let { bluetoothDevice ->
-                    connectedDevices.remove(bluetoothDevice.name ?: bluetoothDevice.toString())
+                    connectedDevices[bluetoothDevice.name ?: bluetoothDevice.toString()] =
+                        BluetoothResult(bluetoothDevice, BluetoothConnectionStatus.DISCONNECTED)
                     promise.resolve(
                         bluetoothDevice.name ?: bluetoothDevice.toString()
                     )
@@ -71,6 +72,10 @@ class BluetoothManagerReactModule(reactContext: ReactApplicationContext) :
 
             override fun onConnectionStateChanged(p0: BluetoothDevice?, p1: Int) {
                 p0?.let { bluetoothDevice ->
+                    val state = BluetoothConnectionStatus.fromBluzState(p1)
+                    connectedDevices[bluetoothDevice.name ?: bluetoothDevice.toString()] =
+                        BluetoothResult(bluetoothDevice, state)
+
                     promise.resolve(
                         bluetoothDevice.name ?: bluetoothDevice.toString()
                     )
@@ -87,7 +92,8 @@ class BluetoothManagerReactModule(reactContext: ReactApplicationContext) :
 
             override fun onFound(p0: BluetoothDevice?) {
                 p0?.let { bluetoothDevice ->
-                    foundDevices[bluetoothDevice.name ?: bluetoothDevice.toString()] = bluetoothDevice
+                    foundDevices[bluetoothDevice.name ?: bluetoothDevice.toString()] =
+                        BluetoothResult(bluetoothDevice, BluetoothConnectionStatus.DISCONNECTED)
                     promise.resolve(
                         bluetoothDevice.name ?: bluetoothDevice.toString()
                     )
@@ -106,12 +112,12 @@ class BluetoothManagerReactModule(reactContext: ReactApplicationContext) :
     // Connect a device
     @ReactMethod()
     fun connectDevice(deviceName: String) {
-        connector?.connect(foundDevices[deviceName])
+        connector?.connect(foundDevices[deviceName]?.device)
     }
 
     // Disconnect a device
     @ReactMethod()
     fun disconnectDevice(deviceName: String) {
-        connector?.disconnect(connectedDevices[deviceName])
+        connector?.disconnect(connectedDevices[deviceName]?.device)
     }
 }
