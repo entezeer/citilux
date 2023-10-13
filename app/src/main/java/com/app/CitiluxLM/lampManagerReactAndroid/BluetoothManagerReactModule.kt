@@ -1,6 +1,12 @@
-package com.app.CitiluxLM.custom_modules
+package com.app.CitiluxLM.lampManagerReactAndroid
 
+import com.facebook.react.bridge.ReactContextBaseJavaModule
+import com.facebook.react.bridge.ReactApplicationContext
+import com.facebook.react.bridge.ReactMethod
+import com.facebook.react.bridge.Promise
 import android.bluetooth.BluetoothDevice
+import android.os.Handler
+import android.os.Looper
 import com.actions.ibluz.factory.BluzDeviceFactory
 import com.actions.ibluz.factory.IBluzDevice
 import com.actions.ibluz.factory.IBluzDevice.OnConnectionListener
@@ -11,9 +17,18 @@ import com.app.CitiluxLM.data.BluetoothResult
 class BluetoothManagerReactModule(reactContext: ReactApplicationContext) :
     ReactContextBaseJavaModule(reactContext) {
 
-    private var connector: IBluzDevice? = BluzDeviceFactory.getDevice(reactContext).apply {
-        setAutoConnectDataChanel(true)
-        setConnectDataChanelBackgroundSupport(true)
+
+    private var connector: IBluzDevice? = null
+
+    private val mainHandler = Handler(Looper.getMainLooper())
+
+    init {
+        mainHandler.post {
+            connector = BluzDeviceFactory.getDevice(reactContext).apply {
+                setAutoConnectDataChanel(true)
+                setConnectDataChanelBackgroundSupport(true)
+            }
+        }
     }
 
     override fun getName(): String {

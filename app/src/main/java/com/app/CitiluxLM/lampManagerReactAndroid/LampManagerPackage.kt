@@ -1,11 +1,11 @@
-package com.app.CitiluxLM.custom_modules
+package com.app.CitiluxLM.lampManagerReactAndroid;
 
-import com.facebook.react.ReactPackage
-import com.facebook.react.bridge.NativeModule
-import com.facebook.react.bridge.ReactApplicationContext
-import com.facebook.react.uimanager.ViewManager
+import com.facebook.react.ReactPackage;
+import com.facebook.react.bridge.NativeModule;
+import com.facebook.react.bridge.ReactApplicationContext;
+import com.facebook.react.uimanager.ViewManager;
 
-class LampManagerPackage : ReactPackage {
+class LampManagerPackage() : ReactPackage {
     override fun createNativeModules(reactContext: ReactApplicationContext): List<NativeModule> {
         return listOf(LampManagerReactModule(reactContext), BluetoothManagerReactModule(reactContext))
     }
