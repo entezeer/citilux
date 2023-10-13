@@ -1,4 +1,4 @@
-package com.app.CitiluxLM.lampManagerAndroid
+package com.example.citilux.react
 
 import com.facebook.react.bridge.ReactContextBaseJavaModule
 import com.facebook.react.bridge.ReactApplicationContext
